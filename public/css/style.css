@@ -1,0 +1,123 @@
+ .IIV::-webkit-media-controls-play-button,
+ .IIV::-webkit-media-controls-start-playback-button {
+     opacity: 0;
+     pointer-events: none;
+     width: 5px;
+ }
+
+body {
+  background-color: #000;
+}
+p {
+  color: #fff;
+}
+
+img {
+  max-width: 100%;
+}
+hr {
+  border-color: white;
+}
+
+.dropdown-menu p {
+  color: black;
+  margin-bottom: 0px
+}
+
+.profileImage {
+  width: 100%;
+}
+
+.profileImageContainer .frontPage {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.userThumb {
+  margin-top: 12px
+}
+.userThumb .name {
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+ul li{
+  list-style: none;
+  color: #fff
+}
+
+.black {
+  color: #000;
+}
+
+.white {
+  color: #FFF;
+}
+
+.logo{
+  width:130px;
+  margin:auto;
+}
+
+.logo-home{
+  width:250px;
+  margin:auto;
+}
+
+.register-box{
+box-shadow: 3px 8px 80px 0px #B22222;
+    /* in order: x offset, y offset, blur size, spread size, color */
+    /* blur size and spread size are optional (they default to 0) */
+}
+
+.conversationItem {
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.conversationNewMessage {
+  margin-bottom: 0px;
+  font-size: 12px;
+  color: red;
+  font-weight: bold;
+}
+
+.message-date {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+.message-sender {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+.message {
+  margin-bottom: 0px;
+}
+
+#messageContainer {
+  height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#chatSubmitBtn {
+  margin-top: 6px;
+}
+
+.profile-img-container {
+  /*max-width: 200px;*/
+  min-height: 250px;
+}
+
+.profile-img-container img {
+  margin: 0 auto;
+}
+
+.profile-img-delete{
+  color: white;
+}
+
+.profile-img-delete i {
+  font-size: 1em;

@@ -1,0 +1,238 @@
+<div class="row">
+  <div class="col-md-3 mx-auto white text-center">
+    <h3 class="text-center">Profile Edit</h3>    
+    {{#if profile.hasImage}}
+      <img src="/profile_images/{{profile.name}}.jpg">
+    {{else}}
+      <img src="/img/default_profile.png">
+    {{/if}}
+    <form method="post" action="/users/profile/image_upload" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">New Profile Image</label>
+        <input type="file" name="file" class="form-control-file">
+        <button>Upload</button>
+      </div>
+    </form>
+  </div>
+  <form class="row" style="width: 100%" method="post" action="/users/profile/edit">
+    <div class="col-md-6 mx-auto">
+      <div class="register-box card card-body">
+        <div class="form-group">
+          <p class="black">Username: {{profile.name}}</p>
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="text" name="age" class="form-control" value="{{profile.age}}" >
+        </div>
+        <div class="form-group">
+          <label for="height">Height</label>
+          <input type="text" name="height" class="form-control" value="{{profile.height}}" >
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input type="text" name="weight" class="form-control" value="{{profile.weight}}" >
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Zipcode</label>
+          <input type="text" name="zipcode" class="form-control" value="{{profile.zipcode}}" >
+        </div>
+        <div class="form-group">
+          <label for="city">Major City</label>
+          <input type="text" name="city" class="form-control" value="{{profile.city}}" >
+        </div>
+        <div class="form-group">
+          <label for="race">Race</label>
+          <select class="form-control" name="race">
+            {{#if profile.race }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.races}}
+                {{#eq this ../profile.race }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.race  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="hairColor">Hair Color</label>
+          <select class="form-control" name="hairColor">
+            {{#if profile.hairColor }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.hairColor}}
+                {{#eq this ../profile.hairColor }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.hairColor  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="eyeColor">Eye Color</label>
+          <select class="form-control" name="eyeColor">
+            {{#if profile.eyeColor }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.eyeColor}}
+                {{#eq this ../profile.eyeColor }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.eyeColor  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mx-auto">
+      <div class="register-box card card-body">        
+        <div class="form-group">
+          <label for="hivStatus">HIV Status</label>
+          <select class="form-control" name="hivStatus">
+            {{#if profile.hivStatus }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.hivStatus}}
+                {{#eq this ../profile.hivStatus }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.hivStatus  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="orientation">Orientation</label>
+          <select class="form-control" name="orientation">
+            {{#if profile.orientation }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.orientation}}
+                {{#eq this ../profile.orientation }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.orientation  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bodyHair">Body hair</label>
+          <select class="form-control" name="bodyHair">
+            {{#if profile.bodyHair }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.bodyHair}}
+                {{#eq this ../profile.bodyHair }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.bodyHair  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bodyType">Body Type</label>
+          <select class="form-control" name="bodyType">
+            {{#if profile.bodyType }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.bodyType}}
+                {{#eq this ../profile.bodyType }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.bodyType  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="faceHair">Face Hair</label>
+          <select class="form-control" name="faceHair">
+            {{#if profile.faceHair }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.faceHair}}
+                {{#eq this ../profile.faceHair }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.faceHair  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="myLook">My Look</label>
+          <select class="form-control" name="myLook">
+            {{#if profile.myLook }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.myLook}}
+                {{#eq this ../profile.myLook }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.myLook  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="relationshipStatus">Relationship Status</label>
+          <select class="form-control" name="relationshipStatus">
+            {{#if profile.relationshipStatus }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.relationshipStatus}}
+                {{#eq this ../profile.relationshipStatus }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.relationshipStatus  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="lookingTo">Looking To</label>
+          <select class="form-control" name="lookingTo">
+            {{#if profile.lookingTo }}
+            {{else}}
+              <option selected="selected"></option>
+            {{/if}}
+            {{#each profileConfig.lookingTo}}
+                {{#eq this ../profile.lookingTo }}
+                  <option selected="selected">{{this}}</option>
+                {{/eq}}
+                {{#noteq this ../profile.lookingTo  }}
+                  <option>{{this}}</option>
+                {{/noteq}}
+            {{/each}}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Update</button>
+      </div>
+    </div>
+  </form>
+</div>

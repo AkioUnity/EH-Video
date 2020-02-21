@@ -1,0 +1,65 @@
+<div class="row">
+  <input type="hidden" id="username" value="{{user.name}}">
+  <div class="col-3">
+    <img class="logo" src="/img/EH_Logo01_2019.png">
+    <ul>
+      <a href="/home"><li><i class="fas fa-users"></i> Members</li></a>
+      <a href="/messages"><li><i class="fas fa-comments"></i> Messages</li></a>
+      <li><i class="fas fa-book-reader"></i> Stories</li>
+    </ul>
+  </div>
+
+  <div class="col-2 white">
+    <p><b>Messaged Users</b></p>
+    <hr>
+    <div id="conversationsContainer">
+      {{#unless conversations}}
+        <p class="text-center">
+          You haven't messaged anyone yet!
+          <br>
+          you can message on member profiles
+        </p>
+      {{/unless}}
+      {{#each conversations as |conversation|}}
+        {{#each participants as |participant|}}
+
+          {{#noteq participant ../../user.name }}
+
+            {{#each conversation.new_message_for as |new_message_for|}}
+              {{#eq new_message_for ../../../user.name }}
+                <p class="conversationNewMessage">New Message</p>
+              {{/eq}}
+            {{/each}}
+
+            <p class="conversationItem" data-name="{{participant}}" data-convid="{{conversation._id}}">
+               {{participant}}
+            </p>        
+            <p>{{#truncate conversation.last_message 10}}{{/truncate}}</p>
+            <hr>
+          {{/noteq}}  
+        {{/each}}
+      {{/each}}
+    </div>
+  </div>
+  <div class="col-7 white">
+    <div class="text-center">
+      <h4 id="convName"> Start a Conversation</h4>
+      <hr>
+    </div>
+    <div id="messageContainer">
+      <div class="text-center">
+        Choose a Member to Chat With
+        <br>
+        Browse Through Members to start chatting
+      </div>
+    </div>
+    <div class="text-center" id="submitContainer" style="display:none">
+      <hr>
+      <div class="form-group">
+        <textarea  class="form-control" id="chatSubmit"></textarea>
+        <button class="btn btn-block btn-primary"  id="chatSubmitBtn">Send Message</button>
+      </div>
+    </div>
+  </div>
+
+</div>

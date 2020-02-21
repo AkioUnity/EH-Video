@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1d1a4929-bc63-4e12-a365-3c71940fa5b9" name="aws" url="http://54.219.40.177">
+        <fileTransfer host="54.219.40.177" port="22" privateKey="E:\work\MEAN\ehdeveloper.ppk" rootFolder="/home/ubuntu/EH-master" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

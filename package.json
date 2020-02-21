@@ -1,0 +1,44 @@
+{
+  "name": "vidjot",
+  "version": "1.0.0",
+  "description": "App to create video ideas",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Brad Traversy",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.524.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-redis": "^3.4.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.16.2",
+    "formidable": "^1.2.1",
+    "imagemin": "^7.0.0",
+    "imagemin-gifsicle": "^6.0.1",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "imagemin-svgo": "^7.0.0",
+    "imagemin-webp": "^5.1.0",
+    "jimp": "^0.6.4",
+    "method-override": "^2.3.9",
+    "mongoose": "^5.8.5",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "nodemailer": "^6.3.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "r": "0.0.5",
+    "sharp": "^0.23.0",
+    "socket.io": "^2.2.0"
+  },
+  "engines": {
+    "node": "10.15.1"
+  }
+}

@@ -1,0 +1,38 @@
+<div class="row">
+
+  <div class="col-3">
+    <img class="logo" src="/img/EH_Logo01_2019.png">
+    <ul>
+      <a href="/home"><li><i class="fas fa-users"></i> Members</li></a>
+      <a href="/messages"><li><i class="fas fa-comments"></i> Messages</li></a>
+      <li><i class="fas fa-book-reader"></i> Stories</li>
+    </ul>
+  </div>
+
+  <div class="col-9">
+    <h4 class="white">Members</h4>
+    <hr>
+    <div class="row">
+      {{#each profiles}}
+        <div class="col-md-3  ">
+          <a href="/users/profile/{{this.name}}">
+            <div class="userThumb">
+              <p class="name">
+                <span>{{this.name}}</span>
+                <span style="float: right">{{this.age}}</span>
+              </p>
+              <div class="profileImageContainer frontPage">
+                {{#if this.hasImage}}
+                  <img class="profileImage" src="/profile_images/{{this.name}}.jpg">
+                {{else}}
+                  <img class="profileImage" src="/img/default_profile.png">
+                {{/if}}
+              </div>
+            </div>
+          </a>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3 mx-auto white text-center">
+    <h3 class="text-center">Account Settings</h3>    
+    <hr>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3 mx-auto white">
+    <h5p><b>Change Password</b></p>
+    <form style="width: 100%" method="POST" action="/users/change-password">
+      <div class="form-group" >
+        <label for="old_password">Old Password</label>
+        <input type="password" name="old_password" class="form-control" >
+        <br>
+        <label for="new_password">New Password</label>
+        <input type="password" name="new_password" class="form-control" >
+        <br>
+        <label for="confirm_new">Confirm new Password</label>
+        <input type="password" name="confirm_new" class="form-control" >
+        <br>
+        <button type="submit" class="btn btn-danger">Submit</button>   
+      </div>
+    </form>
+  </div>
+</div>
