@@ -11,7 +11,7 @@ const ConversationSchema = new Schema({
   }],
   last_message: {
     type: String,
-    required: true
+    required: false
   },
   new_message_for: [{
     type: String,

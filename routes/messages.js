@@ -55,28 +55,22 @@ router.post('/send', ensureAuthenticated, async (req, res) => {
     res.redirect('back');
     return
   }
-  console.log(req.body);
   const recipient = req.body.recipient
   const sender = req.user.name
   const message = req.body.message
   // Create conversation if one doesnt exists
   let MongoConv = await Conversations.findOne({  participants: { $all: [recipient, sender]} })
   if (!MongoConv) {
-    console.log("save new message");
     MongoConv = await Conversations({ participants: [recipient, sender] })
-    MongoConv = await MongoConv.save()
+    MongoConv = MongoConv.save()
   }
-  console.log(MongoConv);
   const messageMongo = {recipient: recipient, message: message, sender: sender, conversation_id: MongoConv._id}
-  console.log(messageMongo);
   const savedMessage = await new Message(messageMongo).save()
-  console.log("ok2");
   if (req.query.format === 'json') {
     res.json(savedMessage)
   } else {
     res.redirect('/messages?new_conv=' + recipient)
   }
-  console.log("ok3");
   // Async update for notifications
   MongoConv.last_message = message
   MongoConv.new_message_for = [recipient]

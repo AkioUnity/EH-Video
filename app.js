@@ -85,6 +85,7 @@ var redisConfig = {
   port: process.env.REDIS_PORT || 6379
 }
 app.use(session({
+    // store: new RedisStore(redisConfig),
     cookie: { maxAge: 60000 },
     secret: 'secret',
   resave: true,
