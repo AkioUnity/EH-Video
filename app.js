@@ -12,7 +12,7 @@ var fileupload = require("express-fileupload");
 require('./models/User');
 
 const app = express();
-
+// http://54.219.40.177:5000/
 // Load routes
 const images = require('./routes/images');
 const ideas = require('./routes/ideas');
@@ -71,7 +71,10 @@ app.set('view engine', 'handlebars');
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(fileupload());
+app.use(fileupload({
+    tempFileDir : '/tmp/',
+    // debug:true
+}));
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -86,7 +89,7 @@ var redisConfig = {
 }
 app.use(session({
     // store: new RedisStore(redisConfig),
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 60000000 },
     secret: 'secret',
   resave: true,
   saveUninitialized: true

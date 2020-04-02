@@ -30,7 +30,7 @@ router.get('/register', (req, res) => {
 // User Profile Edit Route
 router.get('/profile/edit', ensureAuthenticated, (req, res) => {
   if (!req.user || !req.user.name) {
-    res.render('error', {errorStatus: 404})    
+    res.render('error', {errorStatus: 404})
     return
   }
   res.render('users/profile_edit', { profile: req.user, profileConfig: profileConfig });
@@ -39,7 +39,7 @@ router.get('/profile/edit', ensureAuthenticated, (req, res) => {
 // User Profile Edit Route
 router.get('/account-settings', ensureAuthenticated, (req, res) => {
   if (!req.user || !req.user.name) {
-    res.render('error', {errorStatus: 404})    
+    res.render('error', {errorStatus: 404})
     return
   }
   res.render('users/account_settings');
@@ -48,7 +48,7 @@ router.get('/account-settings', ensureAuthenticated, (req, res) => {
 // Update Profile Route
 router.post('/profile/edit', ensureAuthenticated, async (req, res) => {
   if (!req.user || !req.user.name) {
-    res.render('error', {errorStatus: 400})    
+    res.render('error', {errorStatus: 400})
     return
   }
   let user = await User.findOneAndUpdate({name: req.user.name}, req.body, {new : true})
@@ -61,15 +61,17 @@ router.post('/profile/edit', ensureAuthenticated, async (req, res) => {
 
 // Upload image route
 router.post('/profile/image_upload', ensureAuthenticated, upload.single('file'), async (req, res) => {
-  if (!req.user || !req.user.name || !req.file) {
-    res.render('error', {errorStatus: 500})    
+  if (!req.user || !req.user.name || !req.files.file) {
+    console.log(req.files);
+    res.render('error', {errorStatus: 500})
     return
   }
   var filename = path.join(__dirname, '..//public/profile_images/', req.user.name + '.jpg')
-  Jimp.read(req.file.path, async (err, image) => {
+  Jimp.read(req.files.file.data, async (err, image) => {
     if (err) {
       console.log(err);
-      res.render('error', {errorStatus: 500})    
+      console.log(req.files);
+      res.render('error', {errorStatus: 500})
       return
     }
     image
@@ -92,7 +94,7 @@ router.get('/profile/:name', ensureAuthenticated, async (req, res) => {
   //const privateKeys = await S3.getImagesKeys(`profile-images/${req.params.name}/private`)
   const profile = await User.findOne({name: req.params.name})
   if (profile) {
-    res.render('users/profile', {profile: profile, 
+    res.render('users/profile', {profile: profile,
                                   isMyProfile: profile.name == (req.user ? req.user.name : null)}
     );
   } else {
@@ -141,7 +143,7 @@ router.post('/register', (req, res) => {
             email: req.body.email,
             password: req.body.password
           });
-          
+
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               if(err) throw err;
@@ -170,7 +172,7 @@ router.get('/reset-change-password', (req, res) => {
   if (req.query.email && req.query.key) {
     res.render('users/reset-change-password', {key: req.query.key, email: req.query.email})
   } else {
-    res.render('error', {errorStatus: 400})    
+    res.render('error', {errorStatus: 400})
   }
 });
 
@@ -180,7 +182,7 @@ router.post('/reset-change-password', async (req, res) => {
   if (!reqUser || !reqUser.requested_reset) {
     req.flash('error_msg', 'Could not validate account, have you already reset your password?')
     res.redirect('back')
-    return    
+    return
   }
   if(req.body.new_password && req.body.new_password.length < 4){
     req.flash('error_msg', 'Password must be at least 4 characters')
@@ -202,11 +204,11 @@ router.post('/reset-change-password', async (req, res) => {
     reqUser.requested_reset = false
     await reqUser.save()
     req.flash('success_msg', 'Your password has been reset you may now login with your new password')
-    res.redirect('back');    
+    res.redirect('back');
   } else {
     req.flash('error_msg', 'Could not validate account')
     res.redirect('back')
-    return    
+    return
   }
 });
 
@@ -220,7 +222,7 @@ router.post('/reset-password', async (req, res, next) => {
   if (!user || !user._id) {
     req.flash('success_msg', 'An email has been sent to the member associated with this account.')
     res.redirect('back')
-    return    
+    return
   } else {
 
     const salt = await bcrypt.genSalt(10)
@@ -228,12 +230,12 @@ router.post('/reset-password', async (req, res, next) => {
 
     const id_link = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/users/reset-change-password?key=' + hash + '&email=' + user.email
     const msg_text = 'Reset your password here: ' + id_link
-    const msg_html = 'Reset your password here: <a href="' + id_link + '">' + id_link + '</a>' 
+    const msg_html = 'Reset your password here: <a href="' + id_link + '">' + id_link + '</a>'
     user.requested_reset = true
     await user.save()
     await sendEmail(user.email, req.body.email, 'Reset Your Password', msg_text, msg_html )
     // await sendEmail('eh@rafaelancheta.com', 'rafaelrancheta@gmail.com', 'Reset Your Password', msg_text, msg_html )
-    
+
     req.flash('success_msg', 'An email has been sent to the member associated with this account.')
     res.redirect('back');
   }
@@ -241,7 +243,7 @@ router.post('/reset-password', async (req, res, next) => {
 
 router.post('/change-password', ensureAuthenticated, async (req, res) => {
   if (!req.user || !req.user.name) {
-    res.render('error', {errorStatus: 404})    
+    res.render('error', {errorStatus: 404})
     return
   }
   if (!req.body || !req.body.old_password || !req.body.new_password || !req.body.confirm_new) {
