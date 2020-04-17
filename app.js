@@ -11,6 +11,9 @@ const mongoose = require('mongoose');
 var fileupload = require("express-fileupload");
 require('./models/User');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express();
 // http://54.219.40.177:5000/
 // Load routes

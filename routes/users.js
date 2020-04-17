@@ -214,27 +214,28 @@ router.post('/reset-change-password', async (req, res) => {
 
 router.post('/reset-password', async (req, res, next) => {
   if (!req.body.email) {
-    req.flash('error_msg', 'Please provide the account email')
+    req.flash('error_msg', 'Please provide the account email');
     res.redirect('back')
     return
   }
   var user = await User.findOne({email: req.body.email})
   if (!user || !user._id) {
-    req.flash('success_msg', 'An email has been sent to the member associated with this account.')
-    res.redirect('back')
+    req.flash('error_msg', 'We do not have the email. Please try your correct email');
+    res.redirect('back');
     return
   } else {
 
     const salt = await bcrypt.genSalt(10)
-    const hash =  await bcrypt.hash(user._id.toString(), salt)
+    const hash =  await bcrypt.hash(user._id.toString(), salt);
 
-    const id_link = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/users/reset-change-password?key=' + hash + '&email=' + user.email
-    const msg_text = 'Reset your password here: ' + id_link
-    const msg_html = 'Reset your password here: <a href="' + id_link + '">' + id_link + '</a>'
-    user.requested_reset = true
-    await user.save()
-    await sendEmail(user.email, req.body.email, 'Reset Your Password', msg_text, msg_html )
-    // await sendEmail('eh@rafaelancheta.com', 'rafaelrancheta@gmail.com', 'Reset Your Password', msg_text, msg_html )
+    user.requested_reset = true;
+    await user.save();
+
+    const id_link = 'http://54.219.40.177:5000/'+'/users/reset-new-password?key=' + hash + '&email=' + user.email
+    const msg_text = 'Reset your password: ' + id_link
+    const msg_html = 'Please reset your account password <br> <a href="' + id_link + '"><strong>Reset your password: <strong></a>';
+
+    await sendEmail(process.env.Sender_Email, req.body.email, 'Reset Your Password', msg_text, msg_html );
 
     req.flash('success_msg', 'An email has been sent to the member associated with this account.')
     res.redirect('back');
